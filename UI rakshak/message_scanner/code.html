@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary": "#000000", "inverse-on-surface": "#eff1f3", "surface-container-low": "#f2f4f6", "on-background": "#191c1e", "surface-dim": "#d8dadc", "on-secondary": "#ffffff", "on-tertiary": "#ffffff", "on-secondary-fixed-variant": "#005049", "tertiary-fixed-dim": "#4edea3", "error": "#ba1a1a", "error-container": "#ffdad6", "on-surface-variant": "#45464d", "primary-fixed-dim": "#bec6e0", "secondary-fixed-dim": "#6bd8cb", "on-error-container": "#93000a", "on-tertiary-fixed": "#002113", "inverse-primary": "#bec6e0", "surface-bright": "#f7f9fb", "surface-container-highest": "#e0e3e5", "surface": "#f7f9fb", "on-primary-fixed-variant": "#3f465c", "on-tertiary-container": "#009668", "on-tertiary-fixed-variant": "#005236", "tertiary-fixed": "#6ffbbe", "on-surface": "#191c1e", "primary-fixed": "#dae2fd", "secondary-container": "#86f2e4", "on-error": "#ffffff", "on-primary-fixed": "#131b2e", "on-secondary-container": "#006f66", "on-primary-container": "#7c839b", "surface-tint": "#565e74", "primary-container": "#131b2e", "outline-variant": "#c6c6cd", "secondary-fixed": "#89f5e7", "surface-container": "#eceef0", "tertiary": "#000000", "background": "#f7f9fb", "surface-container-lowest": "#ffffff", "secondary": "#006a61", "surface-variant": "#e0e3e5", "on-primary": "#ffffff", "surface-container-high": "#e6e8ea", "tertiary-container": "#002113", "on-secondary-fixed": "#00201d", "outline": "#76777d", "inverse-surface": "#2d3133" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-2xl": "3rem", "gutter": "1rem", "margin-desktop": "2rem", "margin-tablet": "1.5rem", "margin": "1rem", "space-md": "1rem", "space-sm": "0.5rem", "gutter-sm": "0.75rem", "space-lg": "1.5rem", "space-xl": "2rem", "gutter-lg": "1.5rem", "space-xs": "0.25rem" }, "fontFamily": { "title-md": ["Inter"], "headline-md": ["Inter"], "label-md": ["Inter"], "headline-lg-mobile": ["Inter"], "label-sm": ["Inter"], "label-lg": ["Inter"], "body-sm": ["Inter"], "display": ["Inter"], "headline-sm": ["Inter"], "body-md": ["Inter"], "body-lg": ["Inter"], "headline-lg": ["Inter"] }, "fontSize": { "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }], "headline-md": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-lg-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }], "display": ["34px", { "lineHeight": "42px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "700" }] } } } };</script><style>body { min-height: max(884px, 100dvh); }</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-14 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><button aria-label="Go back" class="min-w-[44px] min-h-[44px] flex items-center justify-center -ml-2 text-on-surface hover:text-secondary active:scale-95 transition-all" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><div class="flex flex-col"><span class="font-title-md text-title-md text-on-surface tracking-tight leading-tight truncate">Message Scanner</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none">KAVACH Shield</span></div></div><div class="flex items-center gap-space-sm"><a aria-label="Home" class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-95 transition-all" href="#" onclick="window.location.href='#home-dashboard'"><span class="material-symbols-outlined text-[20px]">home</span></a></div></div></header><main class="flex flex-col relative w-full pt-14 pb-safe bg-surface flex-grow"><div class="flex flex-col w-full px-margin pb-space-xl">
+<!-- Subtitle & Context Banner -->
+<div class="pt-space-md pb-space-sm flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px] text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">sms</span>
+</div>
+<div class="flex flex-col">
+<p class="font-headline-sm text-headline-sm text-on-surface">Fraud Detection Engine</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Paste any SMS, WhatsApp text, or message to check for fraud, phishing, or spoofed links.</p>
+</div>
+</div>
+<!-- Interactive Input Card Container -->
+<div class="mt-space-sm bg-surface-container-lowest rounded-xl shadow-sm p-space-md flex flex-col gap-space-sm transition-all duration-200">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Target Content</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-low px-space-xs py-0.5 rounded" id="char-counter">0 / 500</span>
+</div>
+<!-- Text Area Input with Custom Scroll -->
+<div class="relative w-full">
+<textarea aria-label="Suspicious message input" class="w-full bg-surface-container-low text-on-surface placeholder:text-outline font-body-md text-body-md p-space-md rounded-lg resize-none outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_#006a61] transition-all" id="message-input" maxlength="500" placeholder="Paste or type suspicious message here..." rows="6"></textarea>
+</div>
+<!-- Card Action Row: Quick Clipboard & Reset -->
+<div class="flex items-center justify-between pt-space-xs">
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md active:scale-95 transition-all shadow-sm" id="paste-btn" type="button">
+<span class="material-symbols-outlined text-[16px]">content_paste</span>
+<span>Paste from Clipboard</span>
+</button>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-error active:opacity-70 px-space-sm py-space-xs rounded transition-colors hidden" id="clear-btn" type="button">
+        Clear Text
+      </button>
+</div>
+</div>
+<!-- Quick Preload Scenarios / Test Chips -->
+<div class="mt-space-lg flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant">Try typical scam samples:</span>
+<span class="font-label-sm text-label-sm text-secondary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">bolt</span>
+        Tap to test
+      </span>
+</div>
+<div class="flex flex-wrap gap-space-xs pt-space-xs">
+<button class="sample-chip inline-flex items-center gap-1.5 px-space-md py-2 rounded-full bg-surface-container-lowest shadow-sm text-on-surface font-label-md text-label-md active:scale-95 hover:bg-surface-container transition-all" data-text="Dear Customer, Your electricity power will be disconnected tonight at 9:30 PM from the power officer office. Call immediately at 9876543210 to update your bill." type="button">
+<span class="material-symbols-outlined text-[15px] text-error" style="font-variation-settings: 'FILL' 1;">electric_bolt</span>
+        Electricity Bill Scam
+      </button>
+<button class="sample-chip inline-flex items-center gap-1.5 px-space-md py-2 rounded-full bg-surface-container-lowest shadow-sm text-on-surface font-label-md text-label-md active:scale-95 hover:bg-surface-container transition-all" data-text="SBI Alert: Your Account has been suspended due to uncompleted KYC documents. Click here https://sbi-re-kyc-verify.info to update within 24 hours to prevent block." type="button">
+<span class="material-symbols-outlined text-[15px] text-secondary" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+        Bank KYC Suspension
+      </button>
+<button class="sample-chip inline-flex items-center gap-1.5 px-space-md py-2 rounded-full bg-surface-container-lowest shadow-sm text-on-surface font-label-md text-label-md active:scale-95 hover:bg-surface-container transition-all" data-text="Congratulations! You have won ₹25,00,000 cash prize under KBC Jio Lucky Draw 2025. Send your Aadhaar and claim fees via WhatsApp to 8876543219 now." type="button">
+<span class="material-symbols-outlined text-[15px] text-on-tertiary-container" style="font-variation-settings: 'FILL' 1;">redeem</span>
+        Lottery Win Message
+      </button>
+</div>
+</div>
+<!-- Deep Signal Telemetry & Diagnostics Overview -->
+<div class="mt-space-lg p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Active Engine Verifications</span>
+<span class="font-label-sm text-label-sm text-on-tertiary-container bg-tertiary-fixed-dim/20 px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+        Ready
+      </span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs pt-space-xs">
+<div class="p-space-sm bg-surface-container-low rounded-lg flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px] text-secondary">link_off</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">URL Unmasking</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Detects spoofed domains</span>
+</div>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-lg flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px] text-secondary">psychology</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface truncate">Urgency Triggers</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Panic syntax analysis</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Privacy Guarantee Pill Banner -->
+<div class="mt-space-lg flex items-center justify-center gap-space-xs px-space-md py-space-sm bg-surface-container rounded-full text-center">
+<span class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+      Inspected 100% on-device. No text is saved or uploaded.
+    </span>
+</div>
+<!-- Primary Trigger Action -->
+<div class="mt-space-lg w-full flex flex-col gap-space-xs">
+<button class="w-full h-12 rounded-full bg-secondary text-on-secondary font-label-lg text-label-lg flex items-center justify-center gap-space-sm shadow-md disabled:bg-surface-container-highest disabled:text-outline disabled:shadow-none active:scale-[0.98] transition-all" disabled="" id="scan-trigger-btn" type="button">
+<span class="material-symbols-outlined text-[20px]" id="scan-icon">shield</span>
+<span id="scan-label">Check Message for Scams</span>
+</button>
+</div>
+<!-- Diagnostic Instant Result Simulation Tray (Revealed upon action) -->
+<div class="hidden mt-space-md p-space-md rounded-xl bg-error-container text-on-error-container shadow-sm flex flex-col gap-space-sm" id="result-drawer">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-error" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-error-container">Critical Scam Pattern Detected</span>
+</div>
+<span class="font-label-sm text-label-sm bg-error text-on-error px-2 py-0.5 rounded-full">Score: 98%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-error-container leading-relaxed">
+      This text impersonates an urgent utility authority using deceptive timeline coercion and unregistered mobile routing. Do NOT call the listed number or click links.
+    </p>
+<div class="pt-space-xs flex items-center gap-space-sm">
+<button class="px-space-md py-1.5 rounded-full bg-error text-on-error font-label-sm text-label-sm active:scale-95" type="button">
+        Block &amp; Report Sender
+      </button>
+<button class="px-space-md py-1.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm active:scale-95" id="dismiss-result" type="button">
+        Dismiss
+      </button>
+</div>
+</div>
+</div>
+<script>
+  (function () {
+    const messageInput = document.getElementById('message-input');
+    const charCounter = document.getElementById('char-counter');
+    const pasteBtn = document.getElementById('paste-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const scanTriggerBtn = document.getElementById('scan-trigger-btn');
+    const scanLabel = document.getElementById('scan-label');
+    const scanIcon = document.getElementById('scan-icon');
+    const chips = document.querySelectorAll('.sample-chip');
+    const resultDrawer = document.getElementById('result-drawer');
+    const dismissResult = document.getElementById('dismiss-result');
+
+    function updateState() {
+      const length = messageInput.value.length;
+      charCounter.textContent = length + ' / 500';
+
+      if (length > 0) {
+        clearBtn.classList.remove('hidden');
+        scanTriggerBtn.removeAttribute('disabled');
+      } else {
+        clearBtn.classList.add('hidden');
+        scanTriggerBtn.setAttribute('disabled', 'true');
+        resultDrawer.classList.add('hidden');
+      }
+    }
+
+    messageInput.addEventListener('input', updateState);
+
+    clearBtn.addEventListener('click', function () {
+      messageInput.value = '';
+      updateState();
+      messageInput.focus();
+    });
+
+    pasteBtn.addEventListener('click', async function () {
+      try {
+        if (navigator.clipboard && navigator.clipboard.readText) {
+          const text = await navigator.clipboard.readText();
+          if (text) {
+            messageInput.value = text.slice(0, 500);
+            updateState();
+          }
+        } else {
+          messageInput.focus();
+        }
+      } catch (err) {
+        messageInput.focus();
+      }
+    });
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', function () {
+        const sampleText = this.getAttribute('data-text');
+        messageInput.value = sampleText;
+        updateState();
+        resultDrawer.classList.add('hidden');
+      });
+    });
+
+    scanTriggerBtn.addEventListener('click', function () {
+      if (!messageInput.value.trim()) return;
+
+      scanTriggerBtn.setAttribute('disabled', 'true');
+      scanLabel.textContent = 'Inspecting Vectors...';
+      scanIcon.classList.add('animate-spin');
+      scanIcon.textContent = 'sync';
+
+      setTimeout(function () {
+        scanTriggerBtn.removeAttribute('disabled');
+        scanLabel.textContent = 'Check Message for Scams';
+        scanIcon.classList.remove('animate-spin');
+        scanIcon.textContent = 'shield';
+        resultDrawer.classList.remove('hidden');
+        resultDrawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 700);
+    });
+
+    dismissResult.addEventListener('click', function () {
+      resultDrawer.classList.add('hidden');
+    });
+  })();
+</script></main></body></html>
