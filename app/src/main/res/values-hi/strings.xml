@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RakshakAI</string>
+    <string name="app_tagline">आपका बुद्धिमान डिजिटल रक्षक</string>
+
+    <!-- Bottom Navigation (5 Tabs) -->
+    <string name="tab_home">होम</string>
+    <string name="tab_scan">जांच</string>
+    <string name="tab_protect">सुरक्षा</string>
+    <string name="tab_vault">वॉल्ट</string>
+    <string name="tab_more">अधिक</string>
+
+    <!-- Home -->
+    <string name="home_status_title">सुरक्षित</string>
+    <string name="home_status_subtitle">ऑन-डिवाइस · क्लाउड सिंक</string>
+    <string name="home_quick_actions">त्वरित जांच</string>
+    <string name="home_action_message">संदेश जांचें</string>
+    <string name="home_action_message_desc">SMS व चैट</string>
+    <string name="home_action_link">लिंक जांचें</string>
+    <string name="home_action_link_desc">URL जांचें</string>
+    <string name="home_action_screenshot">स्क्रीनशॉट</string>
+    <string name="home_action_screenshot_desc">ऑफ़लाइन OCR</string>
+    <string name="home_action_qr">QR / UPI</string>
+    <string name="home_action_qr_desc">पेमेंट QR</string>
+    <string name="home_action_inbox">सभी SMS</string>
+    <string name="home_action_inbox_desc">इनबॉक्स अलर्ट</string>
+    <string name="notif_listener_label">RakshakAI संदेश अलर्ट स्कैनर</string>
+    <string name="home_emergency_cta">आपातकालीन सहायता</string>
+    <string name="home_recent_scans">हाल की जांच</string>
+    <string name="home_safety_centre">सुरक्षा केंद्र और क्विज़</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">छोड़ें</string>
+    <string name="onboarding_next">आगे</string>
+    <string name="onboarding_finish">सुरक्षा शुरू करें</string>
+    <string name="onboarding_step1_title">ठग के अगले कदम को पहले ही पहचानें</string>
+    <string name="onboarding_step1_body">रक्षकएआई केवल संदेश को चिह्नित नहीं करता — यह बताता है कि सामने वाला आपसे आगे क्या करवाना चाहता है और नुकसान से पहले आपको रोकता है।</string>
+    <string name="onboarding_step2_title">ऑन-डिवाइस जांच · निजी क्लाउड बैकअप</string>
+    <string name="onboarding_step2_body">संदेश, स्क्रीनशॉट और OCR जांच आपके फोन पर ही होती है। केवल जोखिम सारांश और भरोसेमंद संपर्क आपके Google खाते से Firebase में सुरक्षित रहते हैं।</string>
+    <string name="onboarding_step3_title">अपनी भाषा चुनें</string>
+    <string name="onboarding_step3_body">रक्षकएआई अंग्रेजी, हिन्दी और हिंग्लिश संदेशों को ऑफ़लाइन समझता है।</string>
+    <string name="onboarding_step4_title">त्वरित सुरक्षा सेटअप</string>
+    <string name="onboarding_step4_body">एक बार SMS अनुमति देते ही सभी SMS अपने-आप स्कैन होंगे और आने वाले नए SMS रियल-टाइम में जांचे जाएंगे।</string>
+
+    <!-- Result Screen -->
+    <string name="result_processed_offline">आपके फोन पर जांचा गया · मूल संदेश अपलोड नहीं होता</string>
+    <string name="result_wants_you_to">भेजने वाला आपसे क्या करवाना चाहता है</string>
+    <string name="result_pressure_tactics">दबाव की रणनीतियाँ</string>
+    <string name="result_why_suspicious">यह संदिग्ध क्यों है (सबूत)</string>
+    <string name="result_what_could_happen">बात मानने पर क्या हो सकता है</string>
+    <string name="result_what_to_do">अभी क्या करें</string>
+    <string name="result_possible_next_move">अगला संभावित कदम (पूर्वानुमान)</string>
+    <string name="result_why_this_score">यह स्कोर क्यों मिला?</string>
+    <string name="result_feedback_prompt">क्या यह जांच सही थी?</string>
+    <string name="result_footer_disclaimer">जोखिम स्कोर धोखाधड़ी का प्रमाण नहीं है। पूर्वानुमान संभावनाएँ हैं, निश्चित तथ्य नहीं।</string>
+    <string name="result_read_aloud">सुनें (Read Aloud)</string>
+
+    <!-- Limitations -->
+    <string name="limitations_title">स्पष्ट क्षमताएँ और सीमाएँ</string>
+    <string name="limitations_body">• यह ऐप WhatsApp को सीधे नहीं पढ़ सकता (केवल Share या Paste)।\n• दूसरे ऐप के SMS या WhatsApp संदेश डिलीट नहीं कर सकता (Quarantine केवल इसी ऐप में एन्क्रिप्टेड कॉपी रखता है)।\n• दूसरे बैंकिंग/UPI ऐप के पेमेंट ब्लॉक नहीं कर सकता (केवल रुकने की चेतावनी देता है)।\n• कॉल शील्ड पेस्ट किए गए टेक्स्ट या डेमो स्क्रिप्ट पर काम करता है — असली कॉल रिकॉर्ड नहीं करता।\n• परिवार अलर्ट आपके अपने SMS/Share ऐप से जाता है; दूसरा फ़ोन डैशबोर्ड एक सिमुलेशन है।\n• नियम-आधारित जांच नए तरीकों से चूक सकती है — स्कोर केवल मार्गदर्शन है।</string>
+</resources>

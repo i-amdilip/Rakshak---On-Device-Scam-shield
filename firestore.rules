@@ -1,0 +1,221 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global default-deny safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- GLOBAL HARDENING HELPERS ---
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidTimestamp(ts) {
+      return ts is timestamp && ts <= request.time;
+    }
+
+    // --- VALIDATION BLUEPRINTS ---
+    function isValidUserProfile(data, userId) {
+      return data.userId is string &&
+             data.userId == userId &&
+             data.displayName is string && data.displayName.size() >= 1 && data.displayName.size() <= 80 &&
+             (!('email' in data) || (data.email is string && data.email.size() <= 120)) &&
+             (!('phoneNumber' in data) || (data.phoneNumber is string && data.phoneNumber.size() <= 32)) &&
+             (!('city' in data) || (data.city is string && data.city.size() <= 80)) &&
+             (!('bio' in data) || (data.bio is string && data.bio.size() <= 240)) &&
+             (!('emergencyNotes' in data) || (data.emergencyNotes is string && data.emergencyNotes.size() <= 240)) &&
+             (!('guardianRole' in data) || (data.guardianRole is string && data.guardianRole.size() >= 1 && data.guardianRole.size() <= 40)) &&
+             (!('photoUrl' in data) || (data.photoUrl is string && data.photoUrl.size() <= 500)) &&
+             (!('bookmarkedTips' in data) || (data.bookmarkedTips is list && data.bookmarkedTips.size() <= 30)) &&
+             (!('trustedDomains' in data) || (data.trustedDomains is list && data.trustedDomains.size() <= 50)) &&
+             data.appLanguage is string && data.appLanguage in ['en', 'hi'] &&
+             data.elderlyMode is bool &&
+             data.notificationThreshold is int && data.notificationThreshold >= 40 && data.notificationThreshold <= 90 &&
+             data.totalScansSynced is int && data.totalScansSynced >= 0 &&
+             isValidTimestamp(data.createdAt) &&
+             isValidTimestamp(data.updatedAt);
+    }
+
+    function isValidScanSummary(data, userId) {
+      return data.userId is string &&
+             data.userId == userId &&
+             data.source is string &&
+             data.source in ['MANUAL', 'SHARED', 'SMS', 'URL', 'QR', 'SCREENSHOT', 'CONVERSATION', 'TRANSCRIPT', 'SMS_AUTO'] &&
+             data.riskScore is int && data.riskScore >= 0 && data.riskScore <= 100 &&
+             data.riskLevel is string && data.riskLevel in ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'] &&
+             data.uncertain is bool &&
+             data.categoryName is string && data.categoryName.size() >= 1 && data.categoryName.size() <= 100 &&
+             data.shortExplanation is string && data.shortExplanation.size() <= 240 &&
+             (!('feedbackOption' in data) || (data.feedbackOption is string && data.feedbackOption in ['CORRECT_SCAM', 'FALSE_ALARM', 'MISSED_SOMETHING', 'NOT_SURE'])) &&
+             isValidTimestamp(data.createdAt) &&
+             isValidTimestamp(data.updatedAt);
+    }
+
+    function isValidUserEntry(data, userId) {
+      return data.userId is string &&
+             data.userId == userId &&
+             data.entryType is string &&
+             data.entryType in ['VAULT', 'QUARANTINE', 'PRE_ACTION', 'COLLECTED_MESSAGE', 'ALLOWLIST', 'EMERGENCY_NOTE'] &&
+             data.title is string && data.title.size() >= 1 && data.title.size() <= 120 &&
+             data.category is string && data.category.size() >= 1 && data.category.size() <= 100 &&
+             data.sourceLabel is string && data.sourceLabel.size() >= 1 && data.sourceLabel.size() <= 40 &&
+             data.riskScore is int && data.riskScore >= 0 && data.riskScore <= 100 &&
+             data.riskLevel is string && data.riskLevel in ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'] &&
+             data.summary is string && data.summary.size() <= 300 &&
+             data.reviewed is bool &&
+             isValidTimestamp(data.createdAt) &&
+             isValidTimestamp(data.updatedAt);
+    }
+
+    function isValidTrustedContact(data, userId) {
+      return data.userId is string &&
+             data.userId == userId &&
+             data.displayName is string && data.displayName.size() >= 1 && data.displayName.size() <= 80 &&
+             data.relationship is string && data.relationship.size() >= 1 && data.relationship.size() <= 40 &&
+             data.phoneNumber is string && data.phoneNumber.size() >= 4 && data.phoneNumber.size() <= 32 &&
+             isValidTimestamp(data.createdAt) &&
+             isValidTimestamp(data.updatedAt);
+    }
+
+    function isValidIncident(data, userId) {
+      return data.userId is string &&
+             data.userId == userId &&
+             data.title is string && data.title.size() >= 1 && data.title.size() <= 120 &&
+             data.highestRiskScore is int && data.highestRiskScore >= 0 && data.highestRiskScore <= 100 &&
+             data.status is string && data.status in ['OPEN', 'RESOLVED'] &&
+             (!('notes' in data) || (data.notes is string && data.notes.size() <= 500)) &&
+             isValidTimestamp(data.createdAt) &&
+             isValidTimestamp(data.updatedAt);
+    }
+
+    // --- COLLECTION RULES ---
+
+    // 1. User Profile, Personal Information & Synced Preferences
+    match /users/{userId} {
+      allow get: if isOwner(userId) && isValidId(userId);
+      allow list: if isOwner(userId);
+
+      allow create: if isOwner(userId) &&
+                       isValidId(userId) &&
+                       incoming().keys().hasAll(['userId', 'displayName', 'appLanguage', 'elderlyMode', 'notificationThreshold', 'totalScansSynced', 'createdAt', 'updatedAt']) &&
+                       incoming().keys().hasOnly(['userId', 'displayName', 'email', 'phoneNumber', 'city', 'bio', 'emergencyNotes', 'guardianRole', 'photoUrl', 'bookmarkedTips', 'trustedDomains', 'appLanguage', 'elderlyMode', 'notificationThreshold', 'totalScansSynced', 'createdAt', 'updatedAt']) &&
+                       isValidUserProfile(incoming(), userId);
+
+      allow update: if isOwner(userId) &&
+                       isValidId(userId) &&
+                       isValidUserProfile(incoming(), userId) &&
+                       incoming().userId == existing().userId &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'email', 'phoneNumber', 'city', 'bio', 'emergencyNotes', 'guardianRole', 'photoUrl', 'bookmarkedTips', 'trustedDomains', 'appLanguage', 'elderlyMode', 'notificationThreshold', 'totalScansSynced', 'updatedAt']);
+
+      allow delete: if isOwner(userId) && isValidId(userId);
+
+      // 2. Summary-Only Scan History
+      match /scanSummaries/{scanId} {
+        allow get: if isOwner(userId) && isValidId(scanId);
+        allow list: if isOwner(userId);
+
+        allow create: if isOwner(userId) &&
+                         isValidId(scanId) &&
+                         incoming().keys().hasAll(['userId', 'source', 'riskScore', 'riskLevel', 'uncertain', 'categoryName', 'shortExplanation', 'createdAt', 'updatedAt']) &&
+                         incoming().keys().hasOnly(['userId', 'source', 'riskScore', 'riskLevel', 'uncertain', 'categoryName', 'shortExplanation', 'feedbackOption', 'createdAt', 'updatedAt']) &&
+                         isValidScanSummary(incoming(), userId);
+
+        allow update: if isOwner(userId) &&
+                         isValidId(scanId) &&
+                         isValidScanSummary(incoming(), userId) &&
+                         incoming().userId == existing().userId &&
+                         incoming().createdAt == existing().createdAt &&
+                         incoming().diff(existing()).affectedKeys().hasOnly(['feedbackOption', 'updatedAt']);
+
+        allow delete: if isOwner(userId) && isValidId(scanId);
+      }
+
+      // 3. Real-Time Unified User Entries (Vault, Quarantine, Pre-Action, Collected SMS/Msgs, Allowlist, Emergency Drafts)
+      match /userEntries/{entryId} {
+        allow get: if isOwner(userId) && isValidId(entryId);
+        allow list: if isOwner(userId);
+
+        allow create: if isOwner(userId) &&
+                         isValidId(entryId) &&
+                         incoming().keys().hasAll(['userId', 'entryType', 'title', 'category', 'sourceLabel', 'riskScore', 'riskLevel', 'summary', 'reviewed', 'createdAt', 'updatedAt']) &&
+                         incoming().keys().hasOnly(['userId', 'entryType', 'title', 'category', 'sourceLabel', 'riskScore', 'riskLevel', 'summary', 'reviewed', 'createdAt', 'updatedAt']) &&
+                         isValidUserEntry(incoming(), userId);
+
+        allow update: if isOwner(userId) &&
+                         isValidId(entryId) &&
+                         isValidUserEntry(incoming(), userId) &&
+                         incoming().userId == existing().userId &&
+                         incoming().entryType == existing().entryType &&
+                         incoming().createdAt == existing().createdAt &&
+                         incoming().diff(existing()).affectedKeys().hasOnly(['title', 'category', 'sourceLabel', 'riskScore', 'riskLevel', 'summary', 'reviewed', 'updatedAt']);
+
+        allow delete: if isOwner(userId) && isValidId(entryId);
+      }
+
+      // 4. Trusted Family Contacts (Owner-only PII isolation)
+      match /trustedContacts/{contactId} {
+        allow get: if isOwner(userId) && isValidId(contactId);
+        allow list: if isOwner(userId);
+
+        allow create: if isOwner(userId) &&
+                         isValidId(contactId) &&
+                         incoming().keys().hasAll(['userId', 'displayName', 'relationship', 'phoneNumber', 'createdAt', 'updatedAt']) &&
+                         incoming().keys().hasOnly(['userId', 'displayName', 'relationship', 'phoneNumber', 'createdAt', 'updatedAt']) &&
+                         isValidTrustedContact(incoming(), userId);
+
+        allow update: if isOwner(userId) &&
+                         isValidId(contactId) &&
+                         isValidTrustedContact(incoming(), userId) &&
+                         incoming().userId == existing().userId &&
+                         incoming().createdAt == existing().createdAt &&
+                         incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'relationship', 'phoneNumber', 'updatedAt']);
+
+        allow delete: if isOwner(userId) && isValidId(contactId);
+      }
+
+      // 5. Scam Replay Timeline Incidents (with terminal RESOLVED lock)
+      match /incidents/{incidentId} {
+        allow get: if isOwner(userId) && isValidId(incidentId);
+        allow list: if isOwner(userId);
+
+        allow create: if isOwner(userId) &&
+                         isValidId(incidentId) &&
+                         incoming().keys().hasAll(['userId', 'title', 'highestRiskScore', 'status', 'createdAt', 'updatedAt']) &&
+                         incoming().keys().hasOnly(['userId', 'title', 'highestRiskScore', 'status', 'notes', 'createdAt', 'updatedAt']) &&
+                         incoming().status == 'OPEN' &&
+                         isValidIncident(incoming(), userId);
+
+        allow update: if isOwner(userId) &&
+                         isValidId(incidentId) &&
+                         isValidIncident(incoming(), userId) &&
+                         incoming().userId == existing().userId &&
+                         incoming().createdAt == existing().createdAt &&
+                         existing().status == 'OPEN' && (
+                           (incoming().status == 'OPEN' && incoming().diff(existing()).affectedKeys().hasOnly(['title', 'highestRiskScore', 'notes', 'updatedAt'])) ||
+                           (incoming().status == 'RESOLVED' && incoming().diff(existing()).affectedKeys().hasOnly(['status', 'notes', 'updatedAt']))
+                         );
+
+        allow delete: if isOwner(userId) && isValidId(incidentId);
+      }
+    }
+  }
+}

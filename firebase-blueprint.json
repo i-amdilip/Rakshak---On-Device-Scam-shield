@@ -1,0 +1,334 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Authenticated guardian account profile, personal details, and synced RakshakAI safety preferences.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the account owner."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name (1-80 characters)."
+        },
+        "email": {
+          "type": "string",
+          "description": "Optional verified Google account email address (<= 120 characters)."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Optional user phone number (<= 32 characters)."
+        },
+        "city": {
+          "type": "string",
+          "description": "Optional user city or region (<= 80 characters)."
+        },
+        "bio": {
+          "type": "string",
+          "description": "Optional user bio or safety about note (<= 240 characters)."
+        },
+        "emergencyNotes": {
+          "type": "string",
+          "description": "Optional emergency or bank assistance note (<= 240 characters)."
+        },
+        "guardianRole": {
+          "type": "string",
+          "description": "User protection role label (1-40 characters)."
+        },
+        "photoUrl": {
+          "type": "string",
+          "description": "Optional Google account photo URL (<= 500 characters)."
+        },
+        "bookmarkedTips": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Bookmarked Safety Centre lesson IDs (<= 30 items)."
+        },
+        "trustedDomains": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "User allowlisted trusted domains/senders (<= 50 items)."
+        },
+        "appLanguage": {
+          "type": "string",
+          "enum": ["en", "hi"],
+          "description": "Synced UI and analysis output language preference."
+        },
+        "elderlyMode": {
+          "type": "boolean",
+          "description": "Whether large-text, high-contrast Elderly Mode is enabled."
+        },
+        "notificationThreshold": {
+          "type": "integer",
+          "description": "Alert notification risk threshold (40-90)."
+        },
+        "totalScansSynced": {
+          "type": "integer",
+          "description": "Count of summary scans synced to cloud backup (>= 0)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp set via FieldValue.serverTimestamp() on creation."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp updated via FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "userId",
+        "displayName",
+        "appLanguage",
+        "elderlyMode",
+        "notificationThreshold",
+        "totalScansSynced",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "CloudScanSummary": {
+      "title": "CloudScanSummary",
+      "description": "Privacy-preserving summary-only scam scan record synced per user.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID."
+        },
+        "source": {
+          "type": "string",
+          "enum": ["MANUAL", "SHARED", "SMS", "URL", "QR", "SCREENSHOT", "CONVERSATION", "TRANSCRIPT", "SMS_AUTO"],
+          "description": "Scan input source type."
+        },
+        "riskScore": {
+          "type": "integer",
+          "description": "Normalized risk score from 0 to 100."
+        },
+        "riskLevel": {
+          "type": "string",
+          "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"],
+          "description": "Categorical risk level."
+        },
+        "uncertain": {
+          "type": "boolean",
+          "description": "Whether the deterministic engine flagged low-confidence uncertainty."
+        },
+        "categoryName": {
+          "type": "string",
+          "description": "Classified scam category label (1-100 characters)."
+        },
+        "shortExplanation": {
+          "type": "string",
+          "description": "Short summary explanation without raw message text (0-240 characters)."
+        },
+        "feedbackOption": {
+          "type": "string",
+          "enum": ["CORRECT_SCAM", "FALSE_ALARM", "MISSED_SOMETHING", "NOT_SURE"],
+          "description": "Optional user feedback on scan accuracy."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp set via FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp updated via FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "userId",
+        "source",
+        "riskScore",
+        "riskLevel",
+        "uncertain",
+        "categoryName",
+        "shortExplanation",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "CloudUserEntry": {
+      "title": "CloudUserEntry",
+      "description": "Real-time cloud record for all user entries (Vault metadata, Quarantine metadata, Pre-Action checks, Collected SMS/message alert summaries, Allowlist entries, Emergency complaint notes).",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID."
+        },
+        "entryType": {
+          "type": "string",
+          "enum": ["VAULT", "QUARANTINE", "PRE_ACTION", "COLLECTED_MESSAGE", "ALLOWLIST", "EMERGENCY_NOTE"],
+          "description": "Category of user entry stored in Firestore."
+        },
+        "title": {
+          "type": "string",
+          "description": "Human-readable entry title (1-120 characters)."
+        },
+        "category": {
+          "type": "string",
+          "description": "Classification or tag (1-100 characters)."
+        },
+        "sourceLabel": {
+          "type": "string",
+          "description": "Origin label such as SMS, WhatsApp, PAY_UPI, or VAULT (1-40 characters)."
+        },
+        "riskScore": {
+          "type": "integer",
+          "description": "Risk score from 0 to 100."
+        },
+        "riskLevel": {
+          "type": "string",
+          "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"],
+          "description": "Risk level enum."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Summary, masked snippet, or user note (0-300 characters)."
+        },
+        "reviewed": {
+          "type": "boolean",
+          "description": "Whether the user has reviewed or acknowledged this entry."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp set via FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp updated via FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "userId",
+        "entryType",
+        "title",
+        "category",
+        "sourceLabel",
+        "riskScore",
+        "riskLevel",
+        "summary",
+        "reviewed",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "CloudTrustedContact": {
+      "title": "CloudTrustedContact",
+      "description": "Owner-isolated trusted family guardian contact synced across devices.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Contact display name (1-80 characters)."
+        },
+        "relationship": {
+          "type": "string",
+          "description": "Relationship label (1-40 characters)."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Trusted contact phone number (4-32 characters), strictly owner-isolated."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp set via FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp updated via FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "userId",
+        "displayName",
+        "relationship",
+        "phoneNumber",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "CloudIncident": {
+      "title": "CloudIncident",
+      "description": "Scam Replay Timeline incident summary synced per user.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID."
+        },
+        "title": {
+          "type": "string",
+          "description": "Incident title (1-120 characters)."
+        },
+        "highestRiskScore": {
+          "type": "integer",
+          "description": "Peak risk score observed in this incident (0-100)."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["OPEN", "RESOLVED"],
+          "description": "Incident lifecycle status; RESOLVED is terminal."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional user incident note (<= 500 characters)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp set via FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp updated via FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "userId",
+        "title",
+        "highestRiskScore",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Per-user guardian profile, personal details, and synced app preferences."
+    },
+    "/users/{userId}/scanSummaries/{scanId}": {
+      "schema": { "$ref": "#/entities/CloudScanSummary" },
+      "description": "Summary-only scan records owned by userId."
+    },
+    "/users/{userId}/userEntries/{entryId}": {
+      "schema": { "$ref": "#/entities/CloudUserEntry" },
+      "description": "Real-time unified cloud backup of Vault, Quarantine, Pre-Action checks, Collected SMS/message summaries, Allowlist entries, and Emergency drafts."
+    },
+    "/users/{userId}/trustedContacts/{contactId}": {
+      "schema": { "$ref": "#/entities/CloudTrustedContact" },
+      "description": "Private trusted family contacts owned by userId."
+    },
+    "/users/{userId}/incidents/{incidentId}": {
+      "schema": { "$ref": "#/entities/CloudIncident" },
+      "description": "Scam Replay Timeline incidents owned by userId."
+    }
+  }
+}

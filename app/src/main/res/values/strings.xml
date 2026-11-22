@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RakshakAI</string>
+    <string name="app_tagline">Your Intelligent Digital Guardian</string>
+
+    <!-- Bottom Navigation (5 Tabs) -->
+    <string name="tab_home">Home</string>
+    <string name="tab_scan">Detect</string>
+    <string name="tab_protect">Protect</string>
+    <string name="tab_vault">Vault</string>
+    <string name="tab_more">More</string>
+
+    <!-- Home -->
+    <string name="home_status_title">Protected</string>
+    <string name="home_status_subtitle">On-Device · Cloud Sync</string>
+    <string name="home_quick_actions">Quick Tools</string>
+    <string name="home_action_message">Scan Message</string>
+    <string name="home_action_message_desc">SMS &amp; chats</string>
+    <string name="home_action_link">Scan Link</string>
+    <string name="home_action_link_desc">Check URLs</string>
+    <string name="home_action_screenshot">Screenshot</string>
+    <string name="home_action_screenshot_desc">Offline OCR</string>
+    <string name="home_action_qr">QR / UPI</string>
+    <string name="home_action_qr_desc">Payment QR</string>
+    <string name="home_action_inbox">All SMS</string>
+    <string name="home_action_inbox_desc">Inbox alerts</string>
+    <string name="notif_listener_label">RakshakAI Message Alert Scanner</string>
+    <string name="home_emergency_cta">Emergency Help</string>
+    <string name="home_recent_scans">Recent Scans</string>
+    <string name="home_safety_centre">Safety Centre &amp; Quiz</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_finish">Start Protecting</string>
+    <string name="onboarding_step1_title">Understand the scammer\'s next move</string>
+    <string name="onboarding_step1_body">RakshakAI doesn\'t just flag risky messages — it explains what the sender wants next, highlights pressure tactics, and gives you calm steps before harm happens.</string>
+    <string name="onboarding_step2_title">On-Device Analysis · Private Cloud Backup</string>
+    <string name="onboarding_step2_body">Messages, screenshots, and OCR are processed locally on your device. Only summary risk scores, trusted contacts, and incident titles sync to your Google-authenticated Firebase vault.</string>
+    <string name="onboarding_step3_title">Choose Your Language</string>
+    <string name="onboarding_step3_body">RakshakAI supports English, Hindi (हिन्दी), and Hinglish messages out of the box.</string>
+    <string name="onboarding_step4_title">Quick Protection Setup</string>
+    <string name="onboarding_step4_body">Grant SMS permission once to automatically read all SMS for scams and monitor incoming SMS in real time, or share any message directly to RakshakAI.</string>
+
+    <!-- Result Screen -->
+    <string name="result_processed_offline">Analyzed on this device · Raw message text never uploaded</string>
+    <string name="result_wants_you_to">What the sender wants you to do</string>
+    <string name="result_pressure_tactics">Pressure tactics used</string>
+    <string name="result_why_suspicious">Why this is suspicious (Evidence)</string>
+    <string name="result_what_could_happen">What could happen if you follow it</string>
+    <string name="result_what_to_do">What to do now</string>
+    <string name="result_possible_next_move">Possible next move (Forecast)</string>
+    <string name="result_why_this_score">Why this score?</string>
+    <string name="result_feedback_prompt">Was this helpful?</string>
+    <string name="result_footer_disclaimer">A risk score is not proof of fraud. Predictions are possibilities, not certainties.</string>
+    <string name="result_read_aloud">Read Aloud</string>
+
+    <!-- Limitations -->
+    <string name="limitations_title">Honest Capabilities &amp; Limitations</string>
+    <string name="limitations_body">• Cannot read WhatsApp directly (use Share or Paste).\n• Cannot delete SMS or WhatsApp messages in other apps (Quarantine keeps an encrypted copy inside RakshakAI only).\n• Cannot block or lock payments in banking/UPI apps (Pre-Action Check provides a pause-and-verify reminder).\n• Live Call Shield uses pasted transcripts or scripted demos — RakshakAI does not record or listen to real phone calls.\n• Family Guardian alerts open your own SMS/Share sheet; the second-device Guardian Dashboard is a simulation.\n• Rule-based detection can miss novel scams or raise false alarms — scores are guidance, not proof.</string>
+</resources>

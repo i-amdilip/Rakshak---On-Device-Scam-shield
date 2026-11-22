@@ -1,0 +1,9 @@
+*-debug.log
+firestore-debug.log
+firebase-debug.log
+.gradle/
+build/
+app/build/
+*.iml
+.idea/
+.DS_Store
